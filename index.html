@@ -40,6 +40,22 @@
             margin-right: 16px;
             color: #666;
         }
+        /* 跑马灯样式 */
+        .marquee-wrap {
+            border: 1px solid #999;
+            padding: 6px 0;
+            margin-bottom: 18px;
+            overflow: hidden;
+        }
+        .marquee-text {
+            display: inline-block;
+            white-space: nowrap;
+            animation: scroll 18s linear infinite;
+        }
+        @keyframes scroll {
+            from { transform: translateX(100%); }
+            to { transform: translateX(-100%); }
+        }
         /* 搜索区域 */
         .search-wrap {
             margin-bottom: 18px;
@@ -108,14 +124,18 @@
         <a href="about.html">关于</a>
     </div>
 
-    
+    <!-- 新增跑马灯区域 -->
+    <div class="marquee-wrap">
+        <div class="marquee-text">欢迎ヾ(๑╹ヮ╹๑)ﾉ | 自信附件下载站 | 所有文件均为网盘链接 | 搜索框输入文件名称快速查找资源 | 后续持续更新更多工具软件 | 这里最佳，感谢“github”，有了他，我才能搭建这个网站>ᴗoಣ</div>
+    </div>
+
     <div class="search-wrap">
         <input id="searchInput" type="text" placeholder="输入文件名搜索">
         <button id="searchBtn">搜索</button>
     </div>
 
     <!-- 无结果提示 -->
-    <div class="empty-tip" id="emptyTip">没有此搜索结果</div>
+    <div class="empty-tip" id="emptyTip">没有此搜索结果 -查看是否是关键词搜索错误</div>
 
     <table id="fileTable">
         <thead>
@@ -128,32 +148,32 @@
         </thead>
         <tbody>
                     <tr>
-                <td>𝔽𝕠𝕝𝕕 ℂ𝕣𝕒𝕗𝕥 𝕃𝕒𝕦𝕟𝕔𝕙𝕖𝕣</td>
-                <td>131.3KB</td>
+                <td>Fold Craft Launcher</td>
+                <td>131.3MB</td>
                 <td>2026-6-28-5:28</td>
                 <td><a href="https://pan.xunlei.com/s/VOwCYrBWK7B4Y1FPzcFRQBNXA1?pwd=2nxh" class="download-link">下载</a></td>
             </tr>
             <tr>
-                <td>𝕃𝕚𝕞𝕓𝕠 ℙ𝕝𝕦𝕤 𝕩𝟠𝟞ᴹⁱᶜʳᵒˢᵒᶠᵗ</td>
+                <td>Limbo Plus x86ᴹⁱᶜʳᵒˢᵒᶠᵗ</td>
                 <td>36.7MB</td>
                 <td>2025-6-28-2:28</td>
                 <td><a href="https://pan.xunlei.com/s/VOwBuABRwFjMuKvVsdiyCkorA1?pwd=7td9" class="download-link">下载</a></td>
             </tr>
             <tr>
-                <td>𝕂𝕊𝕎𝔼𝔹_𝟛.𝟡𝟠𝟠</td>
-                <td>226.7KB</td>
+                <td>KWEB</td>
+                <td>226.7MB</td>
                 <td>2026-6-28-5.30</td>
                 <td><a href="https://pan.xunlei.com/s/VOwCZbECUH2IuJM9aFQbqvTvA1?pwd=ttkt#" class="download-link">下载</a></td>
             </tr>            
             <tr>
                 <td>以后会来的.......</td>
-                <td>KB</td>
+                <td>MB</td>
                 <td>2026</td>
                 <td><a href="#" class="download-link">下载</a></td>
             </tr>
             <tr>
                 <td>以后会来的.......</td>
-                <td>KB</td>
+                <td>MB</td>
                 <td>2026</td>
                 <td><a href="#" class="download-link">下载</a></td>
             </tr>
