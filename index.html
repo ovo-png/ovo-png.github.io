@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>自信 - 附件列表</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft Yahei", SimSun, sans-serif;
+        }
+        body {
+            color: #000;
+            background: #fff;
+            padding: 24px;
+            line-height: 1.6;
+        }
+        /* 网站标题样式 */
+        .site-title {
+            font-size: 24px;
+            margin-bottom: 16px;
+            font-weight: normal;
+        }
+        /* 顶部导航极简 */
+        .header {
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #ccc;
+        }
+        .header a {
+            color: #000;
+            text-decoration: none;
+            margin-right: 16px;
+        }
+        .header a:hover {
+            text-decoration: underline;
+        }
+        .header .nav-text {
+            margin-right: 16px;
+            color: #666;
+        }
+        /* 搜索区域 */
+        .search-wrap {
+            margin-bottom: 18px;
+        }
+        #searchInput {
+            width: 320px;
+            padding: 4px 6px;
+            border: 1px solid #999;
+            outline: none;
+        }
+        #searchBtn {
+            padding: 4px 10px;
+            border: 1px solid #999;
+            background: #fff;
+            cursor: pointer;
+        }
+        /* 原生表格，无圆角无阴影 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid #999;
+        }
+        th {
+            background: #eee;
+            border: 1px solid #999;
+            padding: 8px 10px;
+            text-align: left;
+            font-weight: normal;
+        }
+        td {
+            border: 1px solid #999;
+            padding: 8px 10px;
+        }
+        /* 下载链接纯蓝色文字，无按钮样式 */
+        .download-link {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        .download-link:hover {
+            text-decoration: underline;
+        }
+        /* 无搜索结果提示 */
+        .empty-tip {
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            border: 1px solid #999;
+            display: none;
+        }
+        /* 底部版权 */
+        .copyright {
+            margin-top: 30px;
+            padding-top: 12px;
+            border-top: 1px solid #ccc;
+            font-size: 13px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <!-- 网站标题，放在导航下方、搜索框上方 -->
+    <h1 class="site-title">自信</h1>
+    
+    <div class="header">
+        <span class="nav-text">首页</span>
+        <a href="about.html">关于</a>
+    </div>
+
+    
+    <div class="search-wrap">
+        <input id="searchInput" type="text" placeholder="输入文件名搜索">
+        <button id="searchBtn">搜索</button>
+    </div>
+
+    <!-- 无结果提示 -->
+    <div class="empty-tip" id="emptyTip">没有此搜索结果</div>
+
+    <table id="fileTable">
+        <thead>
+            <tr>
+                <th>文件名</th>
+                <th>文件大小</th>
+                <th>上传时间</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Limbo Plus x86ᴹⁱᶜʳᵒˢᵒᶠᵗ.apk</td>
+                <td>36.7MB</td>
+                <td>2025-6-28-2:28</td>
+                <td><a href="https://pan.xunlei.com/s/VOwBuABRwFjMuKvVsdiyCkorA1?pwd=7td9" class="download-link">下载</a></td>
+            </tr>
+            <tr>
+                <td>以后会来的.......</td>
+                <td>KB</td>
+                <td>2026</td>
+                <td><a href="#" class="download-link">下载</a></td>
+            </tr>
+            <tr>
+                <td>以后会来的.......</td>
+                <td>KB</td>
+                <td>2026</td>
+                <td><a href="#" class="download-link">下载</a></td>
+            </tr>
+            <tr>
+                <td>以后会来的.......</td>
+                <td>KB</td>
+                <td>2026</td>
+                <td><a href="#" class="download-link">下载</a></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="copyright">
+        © 2026 自信
+    </div>
+
+<script>
+const input = document.getElementById('searchInput');
+const btn = document.getElementById('searchBtn');
+const table = document.getElementById('fileTable');
+const trList = table.querySelectorAll('tbody tr');
+const emptyTip = document.getElementById('emptyTip');
+
+function doSearch() {
+    const keyword = input.value.trim().toLowerCase();
+    let matchCount = 0;
+
+    trList.forEach(tr => {
+        const fileName = tr.querySelector('td:first-child').textContent.toLowerCase();
+        if (fileName.includes(keyword)) {
+            tr.style.display = '';
+            matchCount++;
+        } else {
+            tr.style.display = 'none';
+        }
+    });
+
+    // 匹配数量为0时显示提示，隐藏表格；否则显示表格，隐藏提示
+    if (matchCount === 0 && keyword !== '') {
+        emptyTip.style.display = 'block';
+        table.style.display = 'none';
+    } else {
+        emptyTip.style.display = 'none';
+        table.style.display = 'table';
+    }
+}
+
+btn.addEventListener('click', doSearch);
+input.addEventListener('keydown', e => {
+    if(e.key === 'Enter') doSearch();
+})
+</script>
+</body>
+</html>
