@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>晚风记事本 - 个人博客</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", system-ui, sans-serif;
+        }
+        body {
+            background-color: #f8f6f2;
+            color: #444;
+            line-height: 1.8;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        /* 头部导航 */
+        header {
+            padding: 40px 0;
+            text-align: center;
+            border-bottom: 1px solid #e0ddd8;
+            margin-bottom: 40px;
+        }
+        header h1 {
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        header p {
+            color: #777;
+            font-size: 16px;
+        }
+        nav {
+            margin-top: 20px;
+        }
+        nav a {
+            text-decoration: none;
+            color: #555;
+            margin: 0 12px;
+            padding: 6px 10px;
+            border-radius: 4px;
+            transition: 0.3s;
+        }
+        nav a:hover {
+            background: #e8f0f8;
+            color: #2b6cb0;
+        }
+        /* 主体布局 */
+        .main-wrap {
+            display: grid;
+            grid-template-columns: 70% 28%;
+            gap: 2%;
+        }
+        /* 文章区 */
+        .article-box {
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+        .article-box h2 {
+            color: #333;
+            margin-bottom: 15px;
+            border-left: 4px solid #69a1d6;
+            padding-left: 12px;
+        }
+        .article-item {
+            padding: 18px 0;
+            border-bottom: 1px solid #f0ede8;
+        }
+        .article-item:last-child {
+            border-bottom: none;
+        }
+        .article-item h3 a {
+            color: #2b6cb0;
+            text-decoration: none;
+        }
+        .article-item h3 a:hover {
+            text-decoration: underline;
+        }
+        .article-desc {
+            color: #666;
+            font-size: 14px;
+            margin-top: 6px;
+        }
+        /* 侧边栏 */
+        .sidebar {
+        }
+        .side-card {
+            background: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+        .side-card h3 {
+            margin-bottom: 15px;
+            color: #333;
+            font-size: 18px;
+        }
+        .tag-list span {
+            display: inline-block;
+            background: #f0f6fc;
+            padding: 4px 10px;
+            border-radius: 20px;
+            margin: 0 6px 8px 0;
+            font-size: 14px;
+            color: #2b6cb0;
+        }
+        /* 关于我页面模块 */
+        .about-box p {
+            margin: 10px 0;
+        }
+        /* 留言板 */
+        .msg-input {
+            width: 100%;
+            border: 1px solid #ddd;
+            padding: 12px;
+            border-radius: 6px;
+            margin: 10px 0;
+            resize: none;
+            height: 120px;
+        }
+        .submit-btn {
+            background: #2b6cb0;
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .submit-btn:hover {
+            background: #225891;
+        }
+        /* 页脚 */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            margin-top: 60px;
+            border-top: 1px solid #e0ddd8;
+            color: #888;
+            font-size: 14px;
+        }
+        /* 响应式适配手机 */
+        @media(max-width:768px){
+            .main-wrap {
+                grid-template-columns: 100%;
+            }
+            header h1 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 网站头部导航 -->
+        <header>
+            <h1>晚风记事本</h1>
+            <p>把平凡日子，写成温柔文字</p>
+            <nav>
+                <a href="#home">首页</a>
+                <a href="#archive">文章归档</a>
+                <a href="#life">生活碎片</a>
+                <a href="#about">关于我</a>
+                <a href="#message">留言板</a>
+            </nav>
+        </header>
+
+        <div class="main-wrap">
+            <!-- 左侧主内容区 -->
+            <div class="main-content">
+                <!-- 首页最新文章 -->
+                <div class="article-box" id="home">
+                    <h2>最新随笔</h2>
+                    <div class="article-item">
+                        <h3><a href="#">独处，是成年人最好的自愈</a></h3>
+                        <div class="article-desc">不必强迫自己合群，安静和自己相处，才是治愈内耗的良药。不必迎合他人的期待，学会接纳孤独，在独处中重新找回自己。</div>
+                    </div>
+                    <div class="article-item">
+                        <h3><a href="#">今年读过的五本治愈系书籍</a></h3>
+                        <div class="article-desc">整理上半年书单，每一本都抚平了我的焦虑。没有晦涩难懂的理论，只有温柔治愈的文字，适合浮躁的时候慢慢品读。</div>
+                    </div>
+                    <div class="article-item">
+                        <h3><a href="#">傍晚散步偶遇城市晚霞</a></h3>
+                        <div class="article-desc">下班路上偶然停下脚步，才发现身边藏着无数温柔风景。忙碌的生活里，偶尔抬头，就能撞见世间浪漫。</div>
+                    </div>
+                </div>
+
+                <!-- 开篇博客文章 -->
+                <div class="article-box">
+                    <h2>搭建博客：给自己留一处精神角落</h2>
+                    <p>纠结了很久，终于拥有了属于自己的独立博客。</p>
+                    <p>从前总习惯把心情写在私密备忘录，写了删，删了写，好像所有情绪都只能短暂存放。后来突然想，不如搭建一个小站点，把所有文字安稳留存下来。</p>
+                    <p>这里不会有激烈的观点，不会有跟风的热点，只有我日常的细碎感受。读完一本书的思考，下班路上看到的落日，深夜突然涌上心头的迷茫，慢慢变好的小瞬间……全都可以写在这里。</p>
+                    <p>人需要一个不用伪装的地方。不用讨好观众，不用在意点赞，仅仅为了取悦自己而书写。</p>
+                    <p>往后日子，慢慢更新。也期待路过的你，留下只言片语。</p>
+                </div>
+
+                <!-- 文章归档 -->
+                <div class="article-box" id="archive">
+                    <h2>文章归档</h2>
+                    <div class="article-item">
+                        <h3><a href="#">2026年06月随笔合集</a></h3>
+                        <div class="article-desc>包含独处感悟、晚霞记录、读书心得三篇短文</div>
+                    </div>
+                    <div class="article-item">
+                        <h3><a href="#">治愈书单整理</a></h3>
+                        <div class="article-desc>全年阅读书籍汇总，附个人读后短评</div>
+                    </div>
+                </div>
+
+                <!-- 生活碎片 -->
+                <div class="article-box" id="life">
+                    <h2>生活碎片</h2>
+                    <p>摄影相册、书单、歌单、日常小事记录区</p>
+                    <br>
+                    <p>近期歌单：轻音乐、民谣、治愈纯音乐</p>
+                    <p>摄影主题：晚霞、街边风景、雨天、街边小店</p>
+                </div>
+
+                <!-- 关于我 -->
+                <div class="article-box about-box" id="about">
+                    <h2>关于晚风</h2>
+                    <p>95后普通打工人，热爱文字与慢生活。</p>
+                    <p>不擅长社交，偏爱独处，习惯用文字收纳情绪。</p>
+                    <p>兴趣：阅读、拍照、短途散步、手写日记、轻音乐。</p>
+                    <h3 style="margin-top:20px;">为什么搭建博客？</h3>
+                    <p>朋友圈空间有限，很多细碎想法无处安放。不想把心事藏在备忘录里，于是搭建这个独立博客。这里没有流量焦虑，没有数据攀比，只为记录自我。</p>
+                    <h3 style="margin-top:20px;">更新规则</h3>
+                    <p>随缘更新，每周至少一篇随笔，不定期分享书单、摄影碎片。如果你也喜欢安静文字，常来坐坐。</p>
+                    <p style="margin-top:20px;">邮箱：wanfengnote@163.com</p>
+                </div>
+
+                <!-- 留言板 -->
+                <div class="article-box" id="message">
+                    <h2>留言板</h2>
+                    <p>欢迎在这里留下你的想法、读后感、生活小事～</p>
+                    <p>可以分享你的烦恼、喜欢的书籍、治愈的小事，自由发言，友善交流。禁止广告、恶意言论，温柔待人。</p>
+                    <textarea class="msg-input" placeholder="写下你的留言..."></textarea>
+                    <button class="submit-btn">提交留言</button>
+                </div>
+            </div>
+
+            <!-- 右侧侧边栏 -->
+            <div class="sidebar">
+                <div class="side-card">
+                    <h3>你好，晚风</h3>
+                    <p>一名文字爱好者，记录生活、思考与细碎热爱，慢慢来，一切都来得及。</p>
+                </div>
+                <div class="side-card">
+                    <h3>文章分类</h3>
+                    <div class="tag-list">
+                        <span>生活随笔</span>
+                        <span>读书影评</span>
+                        <span>成长感悟</span>
+                        <span>小众好物</span>
+                        <span>碎碎念</span>
+                    </div>
+                </div>
+                <div class="side-card">
+                    <h3>博客寄语</h3>
+                    <p>开这个博客，没有宏大目标。只是想拥有一块完全属于自己的小天地，不用迎合任何人，不用刻意修饰文字。开心时写下欢喜，迷茫时记录困惑，多年后回头看，能清晰看见自己一路走来的痕迹。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 页脚 -->
+        <footer>
+            ©2026 晚风记事本 | 所有文章原创，转载请注明出处
+        </footer>
+    </div>
+</body>
+</html>
