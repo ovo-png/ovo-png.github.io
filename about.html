@@ -2,6 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>自信 - 关于</title>
     <style>
         * {
@@ -61,14 +62,34 @@
         }
         .img-wrap {
             margin: 16px 0;
+            text-align: center;
         }
-        /* 控制图片大小：最大宽度350px，居中显示 */
+        .img-tip {
+            font-size: 16px;
+            margin: 8px 0;
+            color: #222;
+            text-align: center;
+        }
+        /* 优化图片样式 */
         .img-wrap img {
             max-width: 350px;
             width: 100%;
             height: auto;
             display: block;
             margin: 0 auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.25s ease;
+            user-select: none;
+            pointer-events: auto;
+        }
+        .img-wrap img:hover {
+            transform: scale(1.02);
+        }
+        .img-wrap img:not([src]),
+        .img-wrap img[src=""] {
+            padding: 20px;
+            border: 1px dashed #999;
         }
         .copyright {
             margin-top: 40px;
@@ -109,14 +130,16 @@
 
         <hr>
         
+        <p class="img-tip">工作室</p>
         <div class="img-wrap">
-            <img src="10.png" alt="联系二维码">
+            <img src="10.png" alt="联系二维码" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='图片加载失败，请稍后重试'">
         </div>
 
         <hr>
         
+        <p class="img-tip">最大贡献</p>
         <div class="img-wrap">
-            <img src="11.png" alt="github">
+            <img src="11.png" alt="Github地址二维码" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='图片加载失败，请稍后重试'">
         </div>
 
     </div>
