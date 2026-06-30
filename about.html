@@ -21,7 +21,6 @@
             margin-bottom: 16px;
             font-weight: normal;
         }
-        /* 顶部导航极简 */
         .header {
             margin-bottom: 24px;
             padding-bottom: 12px;
@@ -35,12 +34,10 @@
         .header a:hover {
             text-decoration: underline;
         }
-        /* 当前页面文字，无链接样式 */
         .current-text {
             margin-right: 16px;
             color: #666;
         }
-        /* 主体内容容器 */
         .about-box {
             max-width: 800px;
         }
@@ -58,20 +55,21 @@
             border: none;
             border-top: 1px solid #ccc;
         }
-        /* 列表样式 */
         .about-list {
             padding-left: 20px;
             margin-bottom: 12px;
         }
-        /* 图片容器样式 */
         .img-wrap {
             margin: 16px 0;
         }
+        /* 控制图片大小：最大宽度350px，居中显示 */
         .img-wrap img {
-            max-width: 100%;
+            max-width: 350px;
+            width: 100%;
             height: auto;
+            display: block;
+            margin: 0 auto;
         }
-        /* 底部版权 */
         .copyright {
             margin-top: 40px;
             padding-top: 12px;
@@ -111,15 +109,13 @@
 
         <hr>
         
-        <!-- 这里是新增的图片位置 -->
         <div class="img-wrap">
-            
             <img src="10.png" alt="联系二维码">
+        </div>
 
-            <hr>
-            
-            <div class="img-wrap">
-            
+        <hr>
+        
+        <div class="img-wrap">
             <img src="11.png" alt="github">
         </div>
 
