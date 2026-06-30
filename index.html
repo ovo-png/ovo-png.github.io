@@ -16,13 +16,13 @@
             padding: 24px;
             line-height: 1.6;
         }
-        /* 网站标题样式 */
+        
         .site-title {
             font-size: 24px;
             margin-bottom: 16px;
             font-weight: normal;
         }
-        /* 顶部导航极简 */
+        
         .header {
             margin-bottom: 20px;
             padding-bottom: 12px;
@@ -40,7 +40,7 @@
             margin-right: 16px;
             color: #666;
         }
-        /* 跑马灯样式 */
+        
         .marquee-wrap {
             border: 1px solid #999;
             padding: 6px 0;
@@ -56,7 +56,7 @@
             from { transform: translateX(100%); }
             to { transform: translateX(-100%); }
         }
-        /* 搜索区域 */
+        
         .search-wrap {
             margin-bottom: 18px;
         }
@@ -72,7 +72,7 @@
             background: #fff;
             cursor: pointer;
         }
-        /* 原生表格，无圆角无阴影 */
+        
         table {
             width: 100%;
             border-collapse: collapse;
@@ -89,7 +89,7 @@
             border: 1px solid #999;
             padding: 8px 10px;
         }
-        /* 下载链接纯蓝色文字，无按钮样式 */
+        
         .download-link {
             color: #0066cc;
             text-decoration: none;
@@ -97,7 +97,7 @@
         .download-link:hover {
             text-decoration: underline;
         }
-        /* 无搜索结果提示 */
+        
         .empty-tip {
             padding: 20px;
             text-align: center;
@@ -105,7 +105,7 @@
             border: 1px solid #999;
             display: none;
         }
-        /* 底部版权 */
+        
         .copyright {
             margin-top: 30px;
             padding-top: 12px;
@@ -116,7 +116,7 @@
     </style>
 </head>
 <body>
-    <!-- 网站标题，放在导航下方、搜索框上方 -->
+    
     <h1 class="site-title">自信 - 附件列表</h1>
     
     <div class="header">
@@ -124,7 +124,7 @@
         <a href="about.html">关于</a>
     </div>
 
-    <!-- 新增跑马灯区域 -->
+    
     <div class="marquee-wrap">
         <div class="marquee-text">欢迎ヾ(๑╹ヮ╹๑)ﾉ | 自信附件下载站 | 所有文件均为网盘链接 | 搜索框输入文件名称快速查找资源 | 后续持续更新更多工具软件 | 这里最佳，感谢“github”，有了他，我才能搭建这个网站>ᴗoಣ</div>
     </div>
@@ -134,14 +134,14 @@
         <button id="searchBtn">搜索</button>
     </div>
 
-    <!-- 无结果提示 -->
+    
     <div class="empty-tip" id="emptyTip">没有此搜索结果 -查看是否是关键词搜索错误</div>
 
     <table id="fileTable">
         <thead>
             <tr>
                 <th>文件名</th>
-                <th>文件后缀</th>
+                <th>文件类型</th>
                 <th>文件大小</th>
                 <th>上传时间</th>
                 <th>密码</th>
