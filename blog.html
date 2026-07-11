@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>自信 - 博客</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft Yahei", SimSun, sans-serif;
+        }
+        body {
+            color: #000;
+            background: #fff;
+            padding: 24px;
+            line-height: 1.8;
+        }
+        .site-title {
+            font-size:24px;
+            margin-bottom:16px;
+            font-weight:normal;
+        }
+        .header {
+            margin-bottom:20px;
+            padding-bottom:12px;
+            border-bottom:1px solid #ccc;
+        }
+        .header a {
+            color:#000;
+            text-decoration:none;
+            margin-right:16px;
+        }
+        .header a:hover {
+            text-decoration:underline;
+        }
+        .header .nav-text {
+            margin-right:16px;
+            color:#666;
+        }
+        /*搜索样式，和首页样式保持一致*/
+        .search-wrap {
+            margin-bottom:18px;
+        }
+        #searchInput {
+            width: 320px;
+            padding: 4px 6px;
+            border: 1px solid #999;
+            outline: none;
+        }
+        #searchBtn {
+            padding: 4px 10px;
+            border: 1px solid #999;
+            background: #fff;
+            cursor: pointer;
+        }
+        .empty-tip {
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            border: 1px solid #999;
+            display: none;
+            margin-bottom:18px;
+        }
+        .article-item{
+            border:1px solid #999;
+            padding:14px 16px;
+            margin-bottom:14px;
+        }
+        .article-title{
+            font-size:18px;
+            margin-bottom:6px;
+        }
+        .article-time{
+            font-size:13px;
+            color:#666;
+            margin-bottom:8px;
+        }
+        .copyright {
+            margin-top: 30px;
+            padding-top: 12px;
+            border-top: 1px solid #ccc;
+            font-size: 13px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="site-title">自信 - 博客</h1>
+    <div class="header">
+        <a href="index.html">首页</a>
+        <span class="nav-text">博客</span>
+        <a href="about.html">关于</a>
+    </div>
+
+    <!--搜索区域-->
+    <div class="search-wrap">
+        <input id="searchInput" type="text" placeholder="搜索文章标题">
+        <button id="searchBtn">搜索</button>
+    </div>
+    <div class="empty-tip" id="emptyTip">没有匹配标题，请更换关键词</div>
+
+    <div class="article-list" id="articleList">
+    
+
+        <div class="article-item">
+            <div class="article-title">暂且还没有</div>
+            <div class="article-time">发布时间:</div>
+            <div class="article-content">等以后的吧，我会给发一些日志，等一些相关信息</div>
+        </div>
+    </div>
+
+    <div class="copyright">
+        © 2025 自信
+    </div>
+
+<script>
+const input = document.getElementById("searchInput");
+const btn = document.getElementById("searchBtn");
+const items = document.querySelectorAll(".article-item");
+const emptyTip = document.getElementById("emptyTip");
+
+//只搜索标题文本
+function blogSearch(){
+    let keyword = input.value.trim().toLowerCase();
+    let findCount = 0;
+    items.forEach(item=>{
+        let titleText = item.querySelector(".article-title").innerText.toLowerCase();
+        if(titleText.includes(keyword)){
+            item.style.display = "block";
+            findCount++;
+        }else{
+            item.style.display = "none";
+        }
+    })
+    if(keyword !== "" && findCount === 0){
+        emptyTip.style.display = "block";
+    }else{
+        emptyTip.style.display = "none";
+    }
+}
+//点击搜索按钮、回车搜索
+btn.addEventListener("click",blogSearch);
+input.addEventListener("keydown",e=>{
+    if(e.key === "Enter") blogSearch();
+})
+</script>
+</body>
+</html>
