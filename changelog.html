@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title data-i18n="logTitle">版本更新日志</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:"Microsoft Yahei",sans-serif;
+        }
+        body{
+            background: rgba(24,116,152,0.08) url("zx.png") center / cover fixed;
+            padding:40px 20px;
+        }
+        .wrap{
+            max-width:500px;
+            margin:0 auto;
+            background:rgba(255,255,255,0.18);
+            backdrop-filter: blur(12px);
+            border:2px solid rgba(153,185,204,0.4);
+            padding:30px;
+        }
+        .notice{
+            border:2px solid rgba(255,210,80,0.6);
+            background:rgba(255,210,80,0.15);
+            padding:18px 12px;
+            margin:25px 0;
+            border-radius:0;
+            text-align:center;
+            font-weight:bold;
+            font-size:16px;
+        }
+        h2{
+            text-align:center;
+            margin-bottom:25px;
+            font-size:22px;
+        }
+        .item{
+            margin-bottom:22px;
+            padding-bottom:14px;
+            border-bottom:1px solid rgba(153,185,204,0.35);
+        }
+        .ver{
+            font-weight:bold;
+            font-size:16px;
+            margin-bottom:8px;
+        }
+        .text{
+            line-height:1.7;
+            font-size:15px;
+        }
+        .back-btn{
+            width:100%;
+            margin-top:0;
+            padding:12px;
+            border:none;
+            background:rgba(24,116,152,0.75);
+            font-size:16px;
+            cursor:pointer;
+        }
+        .back-btn:hover{
+            background:rgba(15,91,124,0.85);
+        }
+        .copyright{
+            margin-top:20px;
+            text-align:center;
+            font-size:13px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <h2 data-i18n="logHead">版本更新日志</h2>
+        <div class="item">
+            <div class="ver" data-i18n="ver0">正式版本‑v1.31.0</div>
+            <div class="text" data-i18n="log0">升级为正式版本；重构多国语言加载逻辑，修复语言切换文字闪烁问题；版本日志页面跳转改为本地index.html；优化Android‑WebView兼容性；精简代码，修复全部遗留BUG。</div>
+        </div>
+        <div class="item">
+            <div class="ver" data-i18n="ver1">测试版本‑v1.30.40.11</div>
+            <div class="text" data-i18n="log1">新增首次启动免责声明弹窗；优化弹窗启动顺序逻辑；弹窗确认状态加入缓存记忆，确认后不会再次弹出；修复少量已知BUG；完善多国语言声明文本翻译。</div>
+        </div>
+        <div class="item">
+            <div class="ver" data-i18n="ver2">测试版本‑v1.30.40.10</div>
+            <div class="text" data-i18n="log2">完善7国语言文本；首次打开软件弹出语言选择面板，弹窗文本实时预览翻译；语言切换时自动切换语种字体；新增官方博客入口；清理全部多余代码。</div>
+        </div>
+        <div class="item">
+            <div class="ver" data-i18n="ver3">测试版本‑v1.22.34.09</div>
+            <div class="text" data-i18n="log3">新增6国语言系统；增加缓存清理功能；优化移动端全面屏适配。</div>
+        </div>
+        <div class="item">
+            <div class="ver" data-i18n="ver4">测试版本‑v1.10.12.01</div>
+            <div class="text" data-i18n="log4">重构页面布局，弹窗高度自适应；添加加载动画；修改整体主题配色。</div>
+        </div>
+        <div class="item">
+            <div class="ver" data-i18n="ver5">测试版本‑v1.0.00.00</div>
+            <div class="text" data-i18n="log5">项目初次发布，实现域名快速跳转基础功能。</div>
+        </div>
+        <div class="notice" data-i18n="noticeText">若查询到软件存在新版本，可前往官方网站下载更新。</div>
+        <button class="back-btn" onclick="window.open('https://ovo-png.github.io/blog.html','_blank')" data-i18n="backText">跳转官网查询公告日志</button>
+        <div class="copyright">zx工作室 © 2026 All Rights Reserved</div>
+    </div>
+
+    <script>
+        const langPack={
+            "zh":{
+                logTitle:"版本更新日志",
+                logHead:"版本更新日志",
+                noticeText:"若查询到软件存在新版本，可前往官方网站下载更新。",
+                ver0:"正式版本‑v1.31.0",
+                log0:"升级为正式版本；重构多国语言加载逻辑，修复语言切换文字闪烁问题；版本日志页面跳转改为本地index.html；优化Android‑WebView兼容性；精简代码，修复全部遗留BUG。",
+                ver1:"测试版本‑v1.30.40.11",
+                log1:"新增首次启动免责声明弹窗；优化弹窗启动顺序逻辑；弹窗确认状态加入缓存记忆，确认后不会再次弹出；修复少量已知BUG；完善多国语言声明文本翻译。",
+                ver2:"测试版本‑v1.30.40.10",
+                log2:"完善7国语言文本；首次打开软件弹出语言选择面板，弹窗文本实时预览翻译；语言切换时自动切换语种字体；新增官方博客入口；清理全部多余代码。",
+                ver3:"测试版本‑v1.22.34.09",
+                ver4:"测试版本‑v1.10.12.01",
+                ver5:"测试版本‑v1.0.00.00",
+                log3:"新增6国语言系统；增加缓存清理功能；优化移动端全面屏适配。",
+                log4:"重构页面布局，弹窗高度自适应；添加加载动画；修改整体主题配色。",
+                log5:"项目初次发布，实现域名快速跳转基础功能。",
+                backText:"跳转官网查询公告日志"
+            },
+            "zh-tw":{
+                logTitle:"版本更新紀錄",
+                logHead:"版本更新紀錄",
+                noticeText:"若查詢到軟體存在新版本，可前往官方網站下載更新。",
+                ver0:"正式版本‑v1.31.0",
+                log0:"升級為正式版本；重構多國語言載入邏輯，修復切換語言時文字閃爍問題；更新日誌頁面跳轉修改為本地index.html；優化Android‑WebView相容性；精簡程式碼，修復所有殘留漏洞。",
+                ver1:"測試版本‑v1.30.40.11",
+                log1:"新增首次啟動免責聲明彈窗；優化彈窗啟動順序邏輯；彈窗確認狀態加入快取記憶，確認之後不再彈出；修復若干已知漏洞；完善多國語言聲明文案翻譯。",
+                ver2:"測試版本‑v1.30.40.10",
+                log2:"完善七國語言文字；首次啟動彈出語言選擇面板，彈窗文字即時預覽翻譯；切換語言自動套用對應字體；新增官方部落格入口；清除多餘程式碼。",
+                ver3:"測試版本‑v1.22.34.09",
+                ver4:"測試版本‑v1.10.12.01",
+                ver5:"測試版本‑v1.0.00.00",
+                log3:"新增六國語言系統；新增快取清除功能；優化行動裝置全螢幕適配。",
+                log4:"重構頁面布局，彈窗高度自適應；加入載入動畫；修改主題配色。",
+                log5:"項目首次發布，完成網址快速跳轉基礎功能。",
+                backText:"前往官網查詢公告日誌"
+            },
+            "en":{
+                logTitle:"Version Changelog",
+                logHead:"Version Changelog",
+                noticeText:"If a new version is available, download updates from the official website.",
+                ver0:"Release‑v1.31.0",
+                log0:"Promote to official release; refactor multi‑language loading logic to fix text flicking issue; redirect changelog page to local index.html; improve Android‑WebView compatibility; trim codes and fix remaining bugs.",
+                ver1:"Test‑v1.30.40.11",
+                log1:"Add disclaimer popup on first launch; optimize popup launch order; save confirmed state into local cache to avoid repeated pop‑ups; fix several known bugs; improve multi‑language disclaimer texts.",
+                ver2:"Test‑v1.30.40.10",
+                log2:"Complete texts for seven languages; launch language‑selection popup on first start with real‑time preview translation; auto‑switch font with language change; add official blog entry; clean redundant codes.",
+                ver3:"Test‑v1.22.34.09",
+                ver4:"Test‑v1.10.12.01",
+                ver5:"Test‑v1.0.00.00",
+                log3:"Add six‑language system, cache‑clear function, full‑screen mobile adaption.",
+                log4:"Rebuild layout, auto‑height modal, loading animation, new theme color.",
+                log5:"First release, implement basic domain jump function.",
+                backText:"Check announcements and logs on official site"
+            },
+            "ja":{
+                logTitle:"更新履歴",
+                logHead:"更新履歴",
+                noticeText:"新版ソフトが存在する場合、公式サイトよりアップデートファイルをダウンロードできます。",
+                ver0:"正式版‑v1.31.0",
+                log0:"正式リリース版へ移行；多言語読み込み処理を再構築し、言語切り替え時の文字ちらつき問題を修正；チェンジログページをローカルindex.htmlに変更；Android‑WebViewの互換性改善；コード整理、残存バグを修正。",
+                ver1:"テスト版‑v1.30.40.11",
+                log1:"初回起動時の免責事項ポップアップを追加；ポップアップ起動順番のロジックを改善；確認状況をキャッシュ保存し再表示しないよう修正；既知の不具合を修正；多言語の免責文テキストを補完。",
+                ver2:"テスト版‑v1.30.40.10",
+                log2:"7か国言語テキストを補完；初回起動時に言語選択パネルを表示、ポップアップ翻訳をリアルタイムプレビュー；言語切り替えでフォント自動変更；公式ブログ入口追加；不要コード削除。",
+                ver3:"テスト版‑v1.22.34.09",
+                ver4:"テスト版‑v1.10.12.01",
+                ver5:"テスト版‑v1.0.00.00",
+                log3:"6か国言語システム、キャッシュ削除機能、スマホ全画面対応を追加。",
+                log4:"レイアウト再構築、ポップアップ高さ自動調整、ローディングアニメーション、テーマカラー変更。",
+                log5:"初回リリース、ドメインジャンプの基礎機能実装。",
+                backText:"公式サイトでお知らせと履歴を確認"
+            },
+            "ru":{
+                logTitle:"Журнал обновлений",
+                logHead:"Журнал обновлений",
+                noticeText:"Если вышла новая версия программы, скачайте обновление на официальном сайте.",
+                ver0:"Релиз‑v1.31.0",
+                log0:"Переход к официальной версии; переработана загрузка многоязычных текстов для устранения мерцания текста; страница журнала обновлений перенаправлена на локальный файл index.html; улучшена совместимость с Android‑WebView; очищен код, исправлены оставшиеся ошибки.",
+                ver1:"Тест‑версия‑v1.30.40.11",
+                log1:"Добавлено окно отказа от ответственности при первом запуске; оптимизирован порядок запуска всплывающих окон; состояние подтверждения сохраняется в кэше для предотвращения повторных показов; исправлены известные ошибки; доработаны тексты декларации на разных языках.",
+                ver2:"Тест‑версия‑v1.30.40.10",
+                log2:"Доработаны тексты семи языков; окно выбора языка при первом запуске с предварительным переводом; автоматическая смена шрифта при смене языка; добавлен вход в официальный блог; удалён лишний код.",
+                ver3:"Тест‑версия‑v1.22.34.09",
+                ver4:"Тест‑версия‑v1.10.12.01",
+                ver5:"Тест‑версия‑v1.0.00.00",
+                log3:"Добавлена поддержка шести языков, очистка кэша, адаптация под полноэкранные телефоны.",
+                log4:"Перестроена верстка, авто‑высота модальных окон, анимация загрузки, новая цветовая схема оформления.",
+                log5:"Первый релиз, реализована базовая функция перехода по доменам.",
+                backText:"Проверьте объявления и логи на официальном сайте"
+            },
+            "de":{
+                logTitle:"Versions‑Änderungsverlauf",
+                logHead:"Versions‑Änderungsverlauf",
+                noticeText:"Falls eine neue Programm‑Version verfügbar ist, laden Sie diese auf der offiziellen Web‑Seite herunter.",
+                ver0:"Release‑v1.31.0",
+                log0:"Wechsel zur offiziellen Release‑Version; Mehrsprachen‑Ladelogik überarbeitet, um flackernden Text bei Sprachwechsel zu beheben; Changelog‑Seite auf lokale index.html umgestellt; Android‑WebView‑Kompatibilität verbessert; Code bereinigt und verbleibende Fehler korrigiert.",
+                ver1:"Test‑Version‑v1.30.40.11",
+                log1:"Haftungs‑Ausschluss‑Popup für den ersten Start hinzugefügt; Reihenfolge der Pop‑up‑Starts optimiert; bestätigter Status wird zwischengespeichert um erneute Anzeigen zu verhindern; bekannte Fehler beseitigt; mehrsprachige Haftungstexte verbessert.",
+                ver2:"Test‑Version‑v1.30.40.10",
+                log2:"Text für sieben Sprachen vervollständigt; Sprachauswahl‑Popup beim ersten Start mit Echtzeit‑Vorschau‑Übersetzung hinzugefügt; automatischer Schriftwechsel bei Sprachwechsel; offizieller‑Blog‑Link ergänzt; überflüssigen Code entfernt.",
+                ver3:"Test‑Version‑v1.22.34.09",
+                ver4:"Test‑Version‑v1.10.12.01",
+                ver5:"Test‑Version‑v1.0.00.00",
+                log3:"Sechs‑Sprachen‑System, Cache‑Löschfunktion und Vollbild‑Handy‑Anpassung hinzugefügt.",
+                log4:"Layout neu aufbauen, automatische Höhe für Modalfenster, Lade‑Animation, neue Themenfarbe.",
+                log5:"Erstveröffentlichung, grundlegende Domain‑Sprung‑Funktion implementiert.",
+                backText:"Auf der offiziellen Seite Ankündigungen und Log‑Dateien einsehen"
+            },
+            "nya":{
+                logTitle:"版本更新记录 (･ω･) にゃ~",
+                logHead:"版本更新记录 (｡• ω •｡) にゃ~",
+                noticeText:"如果软件推出新版本，可以前往官网下载更新哦 (ฅ•ω•ฅ) にゃ~",
+                ver0:"正式版本‑v1.31.0 (・∀・) にゃ~",
+                log0:"软件升级正式版本；重构多语言加载代码，修复切换语言文字闪烁；更新日志页面切换成本地index‑html；适配安卓WebView；整理代码并修复全部残留BUG (ฅ•ω•ฅ) にゃ~",
+                ver1:"测试版本‑v1.30.40.11 (・∀・) にゃ~",
+                log1:"软件第一次打开增加免责声明弹窗；调整弹窗弹出顺序；确认声明之后保存记录，不会再次弹窗；修复一些小BUG；完善各个语种的声明文案翻译 (ฅ•ω•ฅ) にゃ~",
+                ver2:"测试版本‑v1.30.40.10 (・∀・) にゃ~",
+                log2:"完善七国语言文字哦；第一次打开弹出语言选择面板，弹窗文字实时翻译预览；切换语言自动更换对应字体；加上官方博客入口；清理掉多余代码 (ฅ•ω•ฅ) にゃ~",
+                ver3:"测试版本‑v1.22.34.09 (・∀・) にゃ~",
+                ver4:"测试版本‑v1.10.12.01 (≧∇≦) にゃ~",
+                ver5:"测试版本‑v1.0.00.00 (｡-ω-) にゃ~",
+                log3:"添加六国语言系统，增加缓存清理，适配手机全面屏哦 (ฅ•ω•ฅ) にゃ~",
+                log4:"重新排版页面，弹窗自动调整高度，加上加载动画，更换主题配色 (≧ω≦) にゃ~",
+                log5:"项目首次发布，做好域名跳转基础功能啦 (>﹏<) にゃ~",
+                backText:"前往官网查看公告以及更新日志 (･ω･) にゃ~"
+            }
+        };
+        let nowLang;
+        try{
+            nowLang = localStorage.getItem("webLang") || "zh";
+        }catch(e){
+            nowLang = "zh";
+        }
+        const data = langPack[nowLang];
+        document.title = data.logTitle;
+        document.querySelectorAll("[data-i18n]").forEach(el=>{
+            const key = el.getAttribute("data-i18n");
+            el.innerText = data[key];
+        })
+    </script>
+</body>
+</html>
