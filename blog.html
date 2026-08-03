@@ -2,7 +2,8 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- 缩小3倍 scale=0.33 -->
+<meta name="viewport" content="width=1200, initial-scale=0.33, maximum-scale=0.33, user-scalable=no">
 <title>自信博客</title>
 <style>
 *{
@@ -11,18 +12,22 @@
     box-sizing:border-box;
     font-family:Microsoft YaHei;
 }
-body{
+html{
     background:#f8f9fa;
+}
+body{
     color:#333;
     line-height:1.7;
+    width:1200px;
+    margin:0 auto;
 }
 :root{
     --dark:#2c3e50;
-    /* 搜索栏单独行颜色，可自行替换 */
     --search-row:#38536e;
 }
-/* 头部使用渐变实现：顶部一小段是搜索行颜色，下方原深色 */
 header{
+    width:100vw;
+    margin-left: calc((100vw - 1200px) / -2);
     background: linear-gradient(to bottom, var(--search-row) 52px, var(--dark) 52px);
     position:relative;
     padding:52px 0 28px;
@@ -31,8 +36,8 @@ header{
     width:92%;
     max-width:1200px;
     margin:0 auto;
+    position:relative;
 }
-/* 搜索容器 右上角 flex布局放输入框+按钮 */
 .search{
     position:absolute;
     top:12px;
@@ -41,7 +46,6 @@ header{
     gap:6px;
     align-items:center;
 }
-/* 输入框加长宽度 */
 .search input{
     width:180px;
     height:34px;
@@ -55,7 +59,6 @@ header{
     font-size:13px;
     color:#aaa;
 }
-/* 搜索按钮样式 */
 .search-btn{
     height:34px;
     padding:0 14px;
@@ -112,6 +115,8 @@ header{
     text-decoration:none;
 }
 footer{
+    width:100vw;
+    margin-left: calc((100vw - 1200px) / -2);
     background:var(--dark);
     color:#eee;
     text-align:center;
@@ -123,6 +128,124 @@ footer p{
     font-size:14px;
 }
 .pop{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.6);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:999;
+}
+.pop-box{
+    background:#fff;
+    width:92%;
+    max-width:380px;
+    padding:40px 30px;
+    border-radius:14px;
+    text-align:center;
+}
+.pop-box h3{
+    color:var(--dark);
+    margin-bottom:12px;
+    font-size:22px;
+}
+.line{
+    width:50px;
+    height:1px;
+    background:#ddd;
+    margin:10px auto;
+}
+.pop-box button{
+    margin-top:8px;
+    padding:9px 32px;
+    background:var(--dark);
+    color:#fff;
+    border:none;
+    border-radius:10px;
+    font-size:14px;
+}
+</style>
+</head>
+<body>
+<div class="pop" id="welcome">
+    <div class="pop-box">
+        <h3>欢迎来到自信博客</h3>
+        <p>爱永远会分发到每一个人，愿你在这里寻得温柔与力量</p>
+        <div class="line"></div>
+        <p>温馨提示：本博客与附件表为两个独立站点，内容、数据互不互通，无关联关系</p>
+        <button id="closeBtn">开始浏览</button>
+    </div>
+</div>
+
+<header>
+    <div class="wrap">
+        <div class="search">
+            <input type="text" id="searchInput" placeholder="搜索文章">
+            <button class="search-btn" id="searchBtn">搜索</button>
+        </div>
+        <div class="nav">
+            <div class="logo">自信博客</div>
+            <nav>
+                <a href="index.html">首页</a>
+                <a href="#">文章</a>
+                <a href="#">分类</a>
+                <a href="about.html">关于我</a>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="wrap">
+    <div class="list">
+        <div class="article" data-title="Limbo Plusᴹⁱᶜʳᵒˢᵒᶠᵗ">
+            <h2><a href="#">Limbo Plusᴹⁱᶜʳᵒˢᵒᶠᵗ </a></h2>
+            <div class="meta">发布时间：2026-08-013</div>
+            <p>Limbo Plusᴹⁱᶜʳᵒˢᵒᶠᵗ  V-1.3.8 ℤ𝕏工作室            新版本发布关于以及更新的什么？</p>
+            <a href="#" class="read">阅读全文 →</a>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="wrap">
+        <p>制作组：𝓐𝓱 𝓩𝓱𝓪𝓸/啊/自信</p>
+        <p>© 2026 ℤ𝕏工作室 All Rights Reserved</p>
+        <p>𝓪𝓲 𝓮𝔂𝓾𝓪𝓷 𝓱𝓮𝓷𝓰 𝓱𝓾𝓯𝓮𝓷 𝓭𝓪𝓸 𝓶𝓮𝓲 𝔂𝓲 𝓰𝓮 𝓻𝓮𝓷｜爱永远会分发到每一个人</p>
+    </div>
+</footer>
+
+<script>
+const welcome = document.getElementById('welcome');
+const closeBtn = document.getElementById('closeBtn');
+const searchInput = document.getElementById('searchInput');
+const searchBtn = document.getElementById('searchBtn');
+const articles = document.querySelectorAll('.article');
+
+if(!localStorage.getItem('visitedBlog')) welcome.style.display = 'flex';
+closeBtn.onclick = ()=>{
+    welcome.style.display = 'none';
+    localStorage.setItem('visitedBlog','true');
+}
+
+function showAll(){
+    articles.forEach(item=>item.classList.remove('hide'));
+    searchInput.value = '';
+}
+function search(){
+    let key = searchInput.value.trim();
+    if(!key) return showAll();
+    articles.forEach(item=>{
+        let title = item.dataset.title;
+        item.classList.toggle('hide',!title.includes(key));
+    })
+}
+searchInput.addEventListener('keydown',e=>{
+    if(e.key === 'Enter') search();
+})
+searchBtn.addEventListener('click', search);
+</script>
+</body>
+</html>
     position:fixed;
     inset:0;
     background:rgba(0,0,0,0.6);
