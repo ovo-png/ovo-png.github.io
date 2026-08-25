@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>跳转页面</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: "Roboto", "Noto Sans SC", -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #FFFBFE;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            gap: 12px;
+        }
+
+        .headline {
+            font-size: 32px;
+            font-weight: 400;
+            color: #1C1B1F;
+            text-align: center;
+            letter-spacing: 0.25px;
+            line-height: 1.2;
+        }
+
+        .body-text {
+            font-size: 16px;
+            font-weight: 400;
+            color: #49454F;
+            text-align: center;
+            letter-spacing: 0.5px;
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+
+        .password-hint {
+            font-size: 14px;
+            color: #6750A4;
+            font-weight: 500;
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 6px 16px;
+            background: #F3EDF7;
+            border-radius: 20px;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            user-select: none;
+            transition: transform 0.15s ease, background 0.2s;
+            position: relative;
+        }
+
+        .password-hint:active {
+            transform: scale(0.95);
+            background: #EADDFF;
+        }
+
+        .md-btn {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 48px;
+            padding: 0 24px;
+            font-size: 15px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            color: #FFFFFF;
+            background: #6750A4;
+            border: none;
+            border-radius: 24px;
+            cursor: pointer;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+            transition: box-shadow 0.2s ease;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        .md-btn:hover {
+            box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        }
+
+        .md-btn:active {
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        }
+
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.35);
+            transform: scale(0);
+            animation: ripple-anim 0.5s ease-out;
+            pointer-events: none;
+        }
+
+        @keyframes ripple-anim {
+            to { transform: scale(4); opacity: 0; }
+        }
+
+        .dialog-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            z-index: 100;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .dialog-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .md-dialog {
+            background: #FFFBFE;
+            width: 100%;
+            max-width: 340px;
+            border-radius: 28px;
+            padding: 24px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transform: scale(0.9);
+            transition: transform 0.2s ease;
+        }
+
+        .dialog-overlay.active .md-dialog {
+            transform: scale(1);
+        }
+
+        .dialog-title {
+            font-size: 20px;
+            font-weight: 500;
+            color: #1C1B1F;
+            margin-bottom: 4px;
+            letter-spacing: 0.15px;
+        }
+
+        .dialog-subtitle {
+            font-size: 14px;
+            color: #49454F;
+            margin-bottom: 20px;
+        }
+
+        .captcha-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 80px;
+            background: #F3EDF7;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .captcha-img {
+            height: 60px;
+            max-width: 100%;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+
+        .captcha-loading {
+            width: 24px;
+            height: 24px;
+            border: 3px solid #EADDFF;
+            border-top-color: #6750A4;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .refresh-btn {
+            position: absolute;
+            right: 8px;
+            top: 8px;
+            width: 32px;
+            height: 32px;
+            border: none;
+            background: rgba(255,255,255,0.9);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+        }
+
+        .refresh-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .refresh-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: #6750A4;
+        }
+
+        .md-input {
+            width: 100%;
+            height: 56px;
+            padding: 0 16px;
+            font-size: 18px;
+            color: #1C1B1F;
+            background: transparent;
+            border: 1px solid #79747E;
+            border-radius: 4px;
+            outline: none;
+            transition: border-color 0.2s;
+            font-family: inherit;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+
+        .md-input:focus {
+            border-color: #6750A4;
+            border-width: 2px;
+        }
+
+        .md-input:disabled {
+            background: #F3EDF7;
+            color: #79747E;
+            cursor: not-allowed;
+        }
+
+        .error-msg {
+            font-size: 13px;
+            color: #B3261E;
+            margin-top: 8px;
+            text-align: center;
+            height: 20px;
+            opacity: 0;
+            transition: opacity 0.2s;
+            font-weight: 500;
+        }
+
+        .error-msg.show {
+            opacity: 1;
+        }
+
+        .fail-count {
+            font-size: 12px;
+            color: #49454F;
+            text-align: center;
+            margin-top: 4px;
+            height: 16px;
+        }
+
+        .fail-count.warning {
+            color: #B3261E;
+            font-weight: 500;
+        }
+
+        .dialog-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .text-btn {
+            height: 40px;
+            padding: 0 16px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #6750A4;
+            background: transparent;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            letter-spacing: 0.5px;
+            transition: background 0.2s;
+            font-family: inherit;
+        }
+
+        .text-btn:hover {
+            background: rgba(103, 80, 164, 0.08);
+        }
+
+        .filled-btn {
+            height: 40px;
+            padding: 0 24px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #FFFFFF;
+            background: #6750A4;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            letter-spacing: 0.5px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+            font-family: inherit;
+        }
+
+        .filled-btn:disabled {
+            background: #EADDFF;
+            color: #1C1B1F;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .cooldown-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(255, 251, 254, 0.96);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            z-index: 300;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .cooldown-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .cooldown-card {
+            background: #FFFBFE;
+            width: 100%;
+            max-width: 320px;
+            border-radius: 28px;
+            padding: 32px 24px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .cooldown-icon {
+            width: 56px;
+            height: 56px;
+            background: #F9DEDC;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+        }
+
+        .cooldown-icon svg {
+            width: 28px;
+            height: 28px;
+            fill: #B3261E;
+        }
+
+        .cooldown-title {
+            font-size: 20px;
+            font-weight: 500;
+            color: #1C1B1F;
+            margin-bottom: 8px;
+        }
+
+        .cooldown-text {
+            font-size: 14px;
+            color: #49454F;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .cooldown-timer {
+            font-size: 48px;
+            font-weight: 300;
+            color: #6750A4;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: 2px;
+        }
+
+        .cooldown-hint {
+            font-size: 12px;
+            color: #79747E;
+            margin-top: 12px;
+        }
+
+        .jump-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(255, 251, 254, 0.95);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            z-index: 200;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .jump-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .progress-ring {
+            width: 48px;
+            height: 48px;
+            animation: rotate 1.4s linear infinite;
+        }
+
+        .progress-arc {
+            stroke-dasharray: 1, 150;
+            stroke-dashoffset: 0;
+            transform-origin: center;
+            animation: arc-anim 1.4s ease-in-out infinite;
+        }
+
+        @keyframes rotate {
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes arc-anim {
+            0% { stroke-dasharray: 1, 150; stroke-dashoffset: 0; }
+            50% { stroke-dasharray: 90, 150; stroke-dashoffset: -35; }
+            100% { stroke-dasharray: 90, 150; stroke-dashoffset: -124; }
+        }
+
+        .jump-text {
+            margin-top: 16px;
+            font-size: 16px;
+            font-weight: 500;
+            color: #49454F;
+            letter-spacing: 0.5px;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%) translateY(80px);
+            background: #322F35;
+            color: #FFFFFF;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            z-index: 500;
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .toast svg {
+            width: 18px;
+            height: 18px;
+            fill: #D0BCFF;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="headline">Limbo下载</div>
+    <div class="body-text">点击按钮前往下载页面</div>
+    <div class="password-hint" id="mainHint" data-copy="govd">密码：govd（点击复制）</div>
+
+    <button class="md-btn" id="btn">跳转下载</button>
+
+    <!-- 图片验证 Dialog -->
+    <div class="dialog-overlay" id="dialog">
+        <div class="md-dialog">
+            <div class="dialog-title">下载验证</div>
+            <div class="dialog-subtitle">请计算图片中数据的答案</div>
+            
+            <div class="captcha-box" id="captchaBox">
+                <div class="captcha-loading" id="captchaLoading"></div>
+                <img class="captcha-img" id="captchaImg" style="display:none;" alt="验证码">
+                <button class="refresh-btn" id="refreshBtn" title="换一张">
+                    <svg viewBox="0 0 24 24"><path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
+                </button>
+            </div>
+
+            <input type="text" class="md-input" id="answer" placeholder="输入答案" inputmode="numeric" autocomplete="off">
+            <div class="error-msg" id="error">验证错误，已自动刷新验证码</div>
+            <div class="fail-count" id="failCount">剩余尝试次数：5</div>
+            
+            <div class="dialog-actions">
+                <button class="text-btn" id="cancelBtn">取消</button>
+                <button class="filled-btn" id="confirmBtn" disabled>验证并跳转</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 冷却倒计时遮罩 -->
+    <div class="cooldown-overlay" id="cooldownOverlay">
+        <div class="cooldown-card">
+            <div class="cooldown-icon">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+            </div>
+            <div class="cooldown-title">验证失败次数过多</div>
+            <div class="cooldown-text">您已连续输错 5 次，请等待倒计时结束后重新尝试</div>
+            <div class="cooldown-timer" id="cooldownTimer">60</div>
+            <div class="cooldown-hint">秒后自动恢复</div>
+        </div>
+    </div>
+
+    <!-- 正在跳转 遮罩 -->
+    <div class="jump-overlay" id="jumpOverlay">
+        <svg class="progress-ring" viewBox="0 0 48 48">
+            <circle cx="24" cy="24" r="20" fill="none" stroke="#EADDFF" stroke-width="4"/>
+            <circle class="progress-arc" cx="24" cy="24" r="20" fill="none" stroke="#6750A4" stroke-width="4" stroke-linecap="round"/>
+        </svg>
+        <div class="jump-text">正在跳转...</div>
+    </div>
+
+    <!-- 复制成功 Toast -->
+    <div class="toast" id="copyToast">
+        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+        密码已复制到剪贴板
+    </div>
+
+    <script>
+        // 加密的目标网址（Base64）
+        const TARGET_URL = (function(){
+            var p1 = 'aHR0cHM6Ly93d2J1YS5sYW56b3ViLmNvbS9iMDFiamU1enVo';
+            try { return atob(p1); } catch(e) { return ''; }
+        })();
+
+        // 复制功能
+        function copyPassword(text) {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(showToast).catch(fallbackCopy);
+            } else {
+                fallbackCopy(text);
+            }
+        }
+
+        function fallbackCopy(text) {
+            var ta = document.createElement('textarea');
+            ta.value = text;
+            ta.style.position = 'fixed';
+            ta.style.opacity = '0';
+            document.body.appendChild(ta);
+            ta.select();
+            try {
+                document.execCommand('copy');
+                showToast();
+            } catch(e) {}
+            document.body.removeChild(ta);
+        }
+
+        function showToast() {
+            var toast = document.getElementById('copyToast');
+            toast.classList.add('show');
+            setTimeout(function() {
+                toast.classList.remove('show');
+            }, 2000);
+        }
+
+        document.getElementById('mainHint').addEventListener('click', function() {
+            copyPassword(this.getAttribute('data-copy'));
+        });
+
+        // Ripple 效果
+        document.getElementById('btn').addEventListener('click', function(e) {
+            const btn = this;
+            const rect = btn.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+
+            const ripple = document.createElement('span');
+            ripple.classList.add('ripple');
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            btn.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 500);
+
+            setTimeout(openDialog, 150);
+        });
+
+        let currentAnswer = '';
+        let failCount = 0;
+        const MAX_FAIL = 5;
+        const COOLDOWN_SEC = 60;
+        let isCooldown = false;
+        let cooldownInterval = null;
+
+        function updateFailCountUI() {
+            const el = document.getElementById('failCount');
+            const remaining = MAX_FAIL - failCount;
+            el.textContent = '剩余尝试次数：' + remaining;
+            if (remaining <= 2) {
+                el.classList.add('warning');
+            } else {
+                el.classList.remove('warning');
+            }
+        }
+
+        async function loadCaptcha() {
+            const loading = document.getElementById('captchaLoading');
+            const img = document.getElementById('captchaImg');
+            const confirmBtn = document.getElementById('confirmBtn');
+            const error = document.getElementById('error');
+            
+            loading.style.display = 'block';
+            img.style.display = 'none';
+            confirmBtn.disabled = true;
+            document.getElementById('answer').value = '';
+            error.classList.remove('show');
+
+            try {
+                const res = await fetch('https://api.aa1.cn/api/yzmv1/?t=' + Date.now());
+                const data = await res.json();
+                
+                if (data.code === '200' && data.img) {
+                    currentAnswer = String(data.answer);
+                    img.src = data.img;
+                    img.onload = () => {
+                        loading.style.display = 'none';
+                        img.style.display = 'block';
+                        confirmBtn.disabled = false;
+                    };
+                    img.onerror = () => fallbackCaptcha();
+                } else {
+                    fallbackCaptcha();
+                }
+            } catch (err) {
+                fallbackCaptcha();
+            }
+        }
+
+        function fallbackCaptcha() {
+            const loading = document.getElementById('captchaLoading');
+            const img = document.getElementById('captchaImg');
+            const confirmBtn = document.getElementById('confirmBtn');
+            
+            const a = Math.floor(Math.random() * 20) + 1;
+            const b = Math.floor(Math.random() * 20) + 1;
+            currentAnswer = String(a + b);
+            
+            const canvas = document.createElement('canvas');
+            canvas.width = 200;
+            canvas.height = 60;
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = '#F3EDF7';
+            ctx.fillRect(0, 0, 200, 60);
+            ctx.fillStyle = '#1C1B1F';
+            ctx.font = 'bold 28px Roboto, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(a + ' + ' + b + ' = ?', 100, 30);
+            
+            for (let i = 0; i < 3; i++) {
+                ctx.strokeStyle = 'rgba(103, 80, 164, ' + (0.2 + Math.random() * 0.3) + ')';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(Math.random() * 200, Math.random() * 60);
+                ctx.lineTo(Math.random() * 200, Math.random() * 60);
+                ctx.stroke();
+            }
+            
+            img.src = canvas.toDataURL();
+            img.onload = () => {
+                loading.style.display = 'none';
+                img.style.display = 'block';
+                confirmBtn.disabled = false;
+            };
+        }
+
+        function openDialog() {
+            if (isCooldown) {
+                showCooldownOverlay();
+                return;
+            }
+            const dialog = document.getElementById('dialog');
+            dialog.style.display = 'flex';
+            dialog.offsetHeight;
+            dialog.classList.add('active');
+            loadCaptcha();
+            setTimeout(() => document.getElementById('answer').focus(), 300);
+        }
+
+        function closeDialog() {
+            const dialog = document.getElementById('dialog');
+            dialog.classList.remove('active');
+            setTimeout(() => dialog.style.display = 'none', 200);
+        }
+
+        function showCooldownOverlay() {
+            const overlay = document.getElementById('cooldownOverlay');
+            overlay.style.display = 'flex';
+            overlay.offsetHeight;
+            overlay.classList.add('active');
+        }
+
+        function hideCooldownOverlay() {
+            const overlay = document.getElementById('cooldownOverlay');
+            overlay.classList.remove('active');
+            setTimeout(() => overlay.style.display = 'none', 300);
+        }
+
+        function startCooldown() {
+            isCooldown = true;
+            closeDialog();
+            showCooldownOverlay();
+            
+            var remaining = COOLDOWN_SEC;
+            document.getElementById('cooldownTimer').textContent = remaining;
+            
+            cooldownInterval = setInterval(function() {
+                remaining--;
+                document.getElementById('cooldownTimer').textContent = remaining;
+                if (remaining <= 0) {
+                    clearInterval(cooldownInterval);
+                    isCooldown = false;
+                    failCount = 0;
+                    hideCooldownOverlay();
+                }
+            }, 1000);
+        }
+
+        function showJumpOverlay() {
+            const overlay = document.getElementById('jumpOverlay');
+            overlay.style.display = 'flex';
+            overlay.offsetHeight;
+            overlay.classList.add('active');
+        }
+
+        function hideJumpOverlay() {
+            const overlay = document.getElementById('jumpOverlay');
+            overlay.classList.remove('active');
+            setTimeout(() => overlay.style.display = 'none', 300);
+        }
+
+        document.getElementById('cancelBtn').addEventListener('click', closeDialog);
+        document.getElementById('refreshBtn').addEventListener('click', function() {
+            if (!isCooldown) loadCaptcha();
+        });
+
+        document.getElementById('confirmBtn').addEventListener('click', function() {
+            const userAnswer = document.getElementById('answer').value.trim();
+            const errorEl = document.getElementById('error');
+            
+            // 空输入校验
+            if (userAnswer === '') {
+                errorEl.textContent = '请输入字符';
+                errorEl.classList.add('show');
+                return;
+            }
+            
+            if (userAnswer === currentAnswer) {
+                failCount = 0;
+                closeDialog();
+                setTimeout(function() {
+                    showJumpOverlay();
+                    setTimeout(function() {
+                        window.open(TARGET_URL, '_blank');
+                        setTimeout(hideJumpOverlay, 500);
+                    }, 1500);
+                }, 200);
+            } else {
+                failCount++;
+                updateFailCountUI();
+                
+                if (failCount >= MAX_FAIL) {
+                    startCooldown();
+                } else {
+                    errorEl.textContent = '验证错误，已自动刷新验证码';
+                    errorEl.classList.add('show');
+                    loadCaptcha();
+                }
+            }
+        });
+
+        document.getElementById('answer').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') document.getElementById('confirmBtn').click();
+        });
+    </script>
+
+</body>
+</html>
