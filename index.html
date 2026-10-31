@@ -1,265 +1,263 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <title>自信 - 附件列表</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: "Microsoft Yahei", SimSun, sans-serif;
-        }
-        body {
-            color: #000;
-            background: #fff;
-            padding: 24px;
-            line-height: 1.6;
-        }
-        
-        .site-title {
-            font-size: 24px;
-            margin-bottom: 16px;
-            font-weight: normal;
-        }
-        
-        .header {
-            margin-bottom: 20px;
-            padding-bottom: 12px;
-            border-bottom: 1px solid #ccc;
-        }
-        .header a {
-            color: #000;
-            text-decoration: none;
-            margin-right: 16px;
-        }
-        .header a:hover {
-            text-decoration: underline;
-        }
-        .header .nav-text {
-            margin-right: 16px;
-            color: #666;
-        }
-        
-        .marquee-wrap {
-            border: 1px solid #999;
-            padding: 6px 0;
-            margin-bottom: 18px;
-            overflow: hidden;
-        }
-        .marquee-text {
-            display: inline-block;
-            white-space: nowrap;
-            animation: scroll 18s linear infinite;
-        }
-        @keyframes scroll {
-            from { transform: translateX(100%); }
-            to { transform: translateX(-100%); }
-        }
-        
-        .search-wrap {
-            margin-bottom: 18px;
-        }
-        #searchInput {
-            width: 320px;
-            padding: 4px 6px;
-            border: 1px solid #999;
-            outline: none;
-        }
-        #searchBtn {
-            padding: 4px 10px;
-            border: 1px solid #999;
-            background: #fff;
-            cursor: pointer;
-        }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            border: 1px solid #999;
-        }
-        th {
-            background: #eee;
-            border: 1px solid #999;
-            padding: 8px 10px;
-            text-align: left;
-            font-weight: normal;
-        }
-        td {
-            border: 1px solid #999;
-            padding: 8px 10px;
-        }
-        
-        .download-link {
-            color: #0066cc;
-            text-decoration: none;
-        }
-        .download-link:hover {
-            text-decoration: underline;
-        }
-        
-        .empty-tip {
-            padding: 20px;
-            text-align: center;
-            color: #666;
-            border: 1px solid #999;
-            display: none;
-        }
-        
-        .copyright {
-            margin-top: 30px;
-            padding-top: 12px;
-            border-top: 1px solid #ccc;
-            font-size: 13px;
-            color: #333;
-        }
-    </style>
+<meta charset="UTF-8">
+<title>自信 - 附件列表</title>
+<style type="text/css">
+* {
+	margin: 0;
+	padding: 0;
+}
+body {
+	background: #e9e9e9;
+	color: #000;
+	font-family: "Microsoft Yahei",SimSun,sans-serif;
+	font-size:14px;
+	padding:20px;
+}
+a:link {
+	color:#0066cc;
+	text-decoration:underline;
+}
+a:visited {
+	color:#660099;
+	text-decoration:underline;
+}
+a:hover {
+	color:#ff3300;
+	text-decoration:none;
+}
+a:active {
+	color:#ff0000;
+}
+.wrap {
+	width:820px;
+	margin:0 auto;
+	background:#fff;
+	border:1px solid #aaa;
+	padding:16px;
+}
+.title {
+	font-size:22px;
+	text-align:center;
+	margin-bottom:12px;
+}
+.nav {
+	padding:8px;
+	border:1px solid #bbbbbb;
+	background:#f4f4f4;
+	margin-bottom:12px;
+}
+.nav a {
+	margin:0 8px;
+}
+.marquee-box {
+	border:1px solid #999;
+	background:#fffde7;
+	padding:5px;
+	margin-bottom:12px;
+}
+.search-area {
+	padding:8px;
+	border:1px solid #bbb;
+	background:#f7f7f7;
+	margin-bottom:14px;
+}
+#searchInput {
+	border:1px solid #888;
+	padding:3px;
+	width:300px;
+}
+#searchBtn {
+	border:1px solid #777;
+	padding:3px 10px;
+	background:#eeeeee;
+	cursor:pointer;
+}
+table#fileTable {
+	width:100%;
+	border-collapse:collapse;
+	border:1px solid #999;
+}
+#fileTable th {
+	background:#e8e8e8;
+	border:1px solid #999;
+	padding:7px;
+	text-align:left;
+}
+#fileTable td {
+	border:1px solid #999;
+	padding:7px;
+}
+.empty-tip {
+	display:none;
+	border:1px solid #aaa;
+	background:#f9f9f9;
+	padding:20px;
+	text-align:center;
+	color:#555;
+}
+.footer {
+	margin-top:20px;
+	padding-top:10px;
+	border-top:1px solid #cccccc;
+	text-align:center;
+	font-size:13px;
+	color:#444;
+}
+.counter{
+	color:#006600;
+}
+</style>
 </head>
 <body>
-    
-    <h1 class="site-title">自信 - 附件列表</h1>
-    
-    <div class="header">
-        <span class="nav-text">首页</span>
-        <a href="blog.html">博客</a>
-        <a href="about.html">关于</a>
-    </div>
+<div class="wrap">
+	<div class="title">自信 - 附件列表</div>
 
-    
-    <div class="marquee-wrap">
-        <div class="marquee-text">欢迎ヾ(๑╹ヮ╹๑)ﾉ | 自信附件下载站 | 所有文件均为网盘链接 | 搜索框输入文件名称快速查找资源 | 后续持续更新更多工具软件 | 这里最佳，感谢“github”，有了他，我才能搭建这个网站>ᴗoಣ</div>
-    </div>
+	<div class="nav">
+		首页 | <a href="blog.html">博客</a> | <a href="about.html">关于</a>
+	</div>
 
-    <div class="search-wrap">
-        <input id="searchInput" type="text" placeholder="输入文件名搜索">
-        <button id="searchBtn">搜索</button>
-    </div>
+	<div class="marquee-box">
+		<marquee scrollamount="3">欢迎ヾ(๑╹ヮ╹๑)ﾉ | 自信附件下载站 | 所有文件均为网盘链接 | 搜索框输入文件名称快速查找资源 | 后续持续更新更多工具软件 | 这里最佳，感谢“github”，有了他，我才能搭建这个网站>ᴗoಣ</marquee>
+	</div>
 
-    
-    <div class="empty-tip" id="emptyTip">没有此搜索结果 -查看是否是关键词搜索错误</div>
+	<div class="search-area">
+		搜索：
+		<input id="searchInput" type="text" placeholder="输入文件名搜索">
+		<button id="searchBtn">搜索</button>
+	</div>
 
-    <table id="fileTable">
-        <thead>
-            <tr>
-                <th>文件名</th>
-                <th>文件类型</th>
-                <th>文件大小</th>
-                <th>上传时间</th>
-                <th>密码</th>
-                <th>操作</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Screen Alive ℤ𝕏工作室版本</td>
-                <td>apk</td>
-                <td>19.22MB</td>
-                <td>2026-8-14-8:57</td>
-                <td>bi6t</td>
-                <td><a href="http://b-bu.cn/b01bjmjkyd" class="download-link">下载</a></td>
-            </tr>
-            <tr>
-                <td>Winlator-11.1</td>
-                <td>apk</td>
-                <td>189.50MB</td>
-                <td>2025-7-9-10:10</td>
-                <td> </td>
-                <td><a href="https://pan.xunlei.com/s/VOx6AqslK7ejRbGGwL0mLul8A1?pwd=8n4n#" class="download-link">下载</a></td>
-            </tr>
-            <tr>
-                <td>vcredist-v0.105.0</td>
-                <td>exe</td>
-                <td>19.30MB</td>
-                <td>2025-7-8-8:32</td>
-                <td>6fjj</td>
-                <td><a href="https://wwbua.lanzoub.com/b01bjj56ve" class="download-link">下载</a></td>
-            </tr>
-            <tr>
-                <td>Everything-1.4.1.1032.</td>
-                <td>exe</td>
-                <td>1.91MB</td>
-                <td>2025-6-30-8:22</td>
-                <td>4ohq</td>
-                <td><a href="https://wwbua.lanzoub.com/b01bjiaxze" class="download-link">下载</a></td>
-            </tr>
-            <tr>
-                <td>音乐标签</td>
-                <td>apk</td>
-                <td>11MB</td>
-                <td>2025-6-28-9:47</td>
-                <td>be62</td>
-                <td><a href="https://wwbua.lanzoub.com/b01bji6fwj" class="download-link">下载</a></td>
-            </tr>
-            <tr>
-                <td>火绒</td>
-                <td>exe</td>
-                <td>65.79MB</td>
-                <td>2025-6-28-9:20</td>
-                <td>3bbd</td>
-                <td><a href="https://wwbua.lanzoub.com/b01bji6cih" class="download-link">下载</a></td>
-            </tr>
-           <tr>
-                <td>7zip</td>
-                <td>exe</td>
-                <td>2.9MB</td>
-                <td>2025-6-28-6:30</td>
-                <td>h06y</td>
-                <td><a href="https://wwbua.lanzoub.com/iXY4h3tdmfle" class="download-link">下载</a></td>
-           </tr>
-           <tr>
-                <td>Fold Craft Launcher</td>
-                <td>apk</td>
-                <td>131.3MB</td>
-                <td>2025-6-28-5:28</td>
-                <td> </td>
-                <td><a href="https://pan.xunlei.com/s/VOwCYrBWK7B4Y1FPzcFRQBNXA1?pwd=2nxh" class="download-link">下载</a></td>
-            </tr>
-            <tr>
-                <td>Limbo Plus x86ᴹⁱᶜʳᵒˢᵒᶠᵗ</td>
-                <td>apk</td>
-                <td>36.7MB</td>
-                <td>2025-6-28-2:28</td>
-                <td>govd</td>
-                <td><a href="https://wwbua.lanzoub.com/b01bje5zuh" class="download-link">下载</a></td>
-            </tr>
-            <tr>
-                <td>KWEB</td>
-                <td>apk</td>
-                <td>226.7MB</td>
-                <td>2025-6-28-5:30</td>
-                <td> </td>
-                <td><a href="https://pan.xunlei.com/s/VOwCZbECUH2IuJM9aFQbqvTvA1?pwd=ttkt#" class="download-link">下载</a></td>
-            </tr>            
-            <tr>
-                <td>玩机应用</td>
-                <td>apk</td>
-                <td>100MB＋</td>
-                <td>2025-6-28-8:43</td>
-                <td>0000</td>
-                <td><a href="https://wwbua.lanzoub.com/b01bjbxuhe" class="download-link">下载</a></td>
-            </tr>
-            <tr>
-                <td>Windows 所有虚拟磁盘</td>
-                <td>qcow2/vhd</td>
-                <td>1.85TB</td>
-                <td>2025-6-28-6:11</td>
-                <td> </td>
-                <td><a href="https://1858052653.share.123pan.cn/123pan/owmlvd-RH02H" class="download-link">下载</a></td>
-            </tr>
-            <tr>
-                <td>微软系统下载站</td>
-                <td>网页</td>
-                <td>无</td>
-                <td>2025-6-28-6:15</td>
-                <td> </td>
-                <td><a href="https://www.microsoft.com/zh-cn/software-download" class="download-link">跳转</a></td>
-            </tr>
-        </tbody>
-    </table>
+	<div class="empty-tip" id="emptyTip">没有此搜索结果 -查看是否是关键词搜索错误</div>
 
-    <div class="copyright">
-        © 2025 自信
-    </div>
+	<table id="fileTable">
+		<thead>
+			<tr>
+				<th>文件名</th>
+				<th>文件类型</th>
+				<th>文件大小</th>
+				<th>上传时间</th>
+				<th>密码</th>
+				<th>操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Screen Alive ℤ𝕏工作室版本</td>
+				<td>apk</td>
+				<td>19.22MB</td>
+				<td>2026-8-14-8:57</td>
+				<td>bi6t</td>
+				<td><a href="http://b-bu.cn/b01bjmjkyd">下载</a></td>
+			</tr>
+			<tr>
+				<td>Winlator-11.1</td>
+				<td>apk</td>
+				<td>189.50MB</td>
+				<td>2025-7-9-10:10</td>
+				<td> </td>
+				<td><a href="https://pan.xunlei.com/s/VOx6AqslK7ejRbGGwL0mLul8A1?pwd=8n4n#">下载</a></td>
+			</tr>
+			<tr>
+				<td>vcredist-v0.105.0</td>
+				<td>exe</td>
+				<td>19.30MB</td>
+				<td>2025-7-8-8:32</td>
+				<td>6fjj</td>
+				<td><a href="https://wwbua.lanzoub.com/b01bjj56ve">下载</a></td>
+			</tr>
+			<tr>
+				<td>Everything-1.4.1.1032.</td>
+				<td>exe</td>
+				<td>1.91MB</td>
+				<td>2025-6-30-8:22</td>
+				<td>4ohq</td>
+				<td><a href="https://wwbua.lanzoub.com/b01bjiaxze">下载</a></td>
+			</tr>
+			<tr>
+				<td>音乐标签</td>
+				<td>apk</td>
+				<td>11MB</td>
+				<td>2025-6-28-9:47</td>
+				<td>be62</td>
+				<td><a href="https://wwbua.lanzoub.com/b01bji6fwj">下载</a></td>
+			</tr>
+			<tr>
+				<td>火绒</td>
+				<td>exe</td>
+				<td>65.79MB</td>
+				<td>2025-6-28-9:20</td>
+				<td>3bbd</td>
+				<td><a href="https://wwbua.lanzoub.com/b01bji6cih">下载</a></td>
+			</tr>
+			<tr>
+				<td>7zip</td>
+				<td>exe</td>
+				<td>2.9MB</td>
+				<td>2025-6-28-6:30</td>
+				<td>h06y</td>
+				<td><a href="https://wwbua.lanzoub.com/iXY4h3tdmfle">下载</a></td>
+			</tr>
+			<tr>
+				<td>Fold Craft Launcher</td>
+				<td>apk</td>
+				<td>131.3MB</td>
+				<td>2025-6-28-5:28</td>
+				<td> </td>
+				<td><a href="https://pan.xunlei.com/s/VOwCYrBWK7B4Y1FPzcFRQBNXA1?pwd=2nxh">下载</a></td>
+			</tr>
+			<tr>
+				<td>Limbo Plus x86ᴹⁱᶜʳᵒˢᵒᶠᵗ</td>
+				<td>apk</td>
+				<td>36.7MB</td>
+				<td>2025-6-28-2:28</td>
+				<td>govd</td>
+				<td><a href="https://wwbua.lanzoub.com/b01bje5zuh">下载</a></td>
+			</tr>
+			<tr>
+				<td>KWEB</td>
+				<td>apk</td>
+				<td>226.7MB</td>
+				<td>2025-6-28-5:30</td>
+				<td> </td>
+				<td><a href="https://pan.xunlei.com/s/VOwCZbECUH2IuJM9aFQbqvTvA1?pwd=ttkt#">下载</a></td>
+			</tr>
+			<tr>
+				<td>玩机应用</td>
+				<td>apk</td>
+				<td>100MB＋</td>
+				<td>2025-6-28-8:43</td>
+				<td>0000</td>
+				<td><a href="https://wwbua.lanzoub.com/b01bjbxuhe">下载</a></td>
+			</tr>
+			<tr>
+				<td>Windows 所有虚拟磁盘</td>
+				<td>qcow2/vhd</td>
+				<td>1.85TB</td>
+				<td>2025-6-28-6:11</td>
+				<td> </td>
+				<td><a href="https://1858052653.share.123pan.cn/123pan/owmlvd-RH02H">下载</a></td>
+			</tr>
+			<tr>
+				<td>微软系统下载站</td>
+				<td>网页</td>
+				<td>无</td>
+				<td>2025-6-28-6:15</td>
+				<td> </td>
+				<td><a href="https://www.microsoft.com/zh-cn/software-download">跳转</a></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<div class="footer">
+		访问统计：<span class="counter">【18629】</span><br>
+		友情链接：<a href="#">个人博客</a> | <a href="#">资源分享站</a> | <a href="#">工具合集</a>
+		<br>
+		© 2018 自信 版权所有
+		<br>
+		本站资源仅作学习交流用途，请下载后24小时内删除
+	</div>
+</div>
 
 <script>
 const input = document.getElementById('searchInput');
@@ -269,31 +267,28 @@ const trList = table.querySelectorAll('tbody tr');
 const emptyTip = document.getElementById('emptyTip');
 
 function doSearch() {
-    const keyword = input.value.trim().toLowerCase();
-    let matchCount = 0;
-
-    trList.forEach(tr => {
-        const fileName = tr.querySelector('td:first-child').textContent.toLowerCase();
-        if (fileName.includes(keyword)) {
-            tr.style.display = '';
-            matchCount++;
-        } else {
-            tr.style.display = 'none';
-        }
-    });
-
-    if (matchCount === 0 && keyword !== '') {
-        emptyTip.style.display = 'block';
-        table.style.display = 'none';
-    } else {
-        emptyTip.style.display = 'none';
-        table.style.display = 'table';
-    }
+	const keyword = input.value.trim().toLowerCase();
+	let matchCount = 0;
+	trList.forEach(tr => {
+		const fileName = tr.querySelector('td:first-child').textContent.toLowerCase();
+		if (fileName.includes(keyword)) {
+			tr.style.display = '';
+			matchCount++;
+		} else {
+			tr.style.display = 'none';
+		}
+	});
+	if (matchCount === 0 && keyword !== '') {
+		emptyTip.style.display = 'block';
+		table.style.display = 'none';
+	} else {
+		emptyTip.style.display = 'none';
+		table.style.display = 'table';
+	}
 }
-
 btn.addEventListener('click', doSearch);
 input.addEventListener('keydown', e => {
-    if(e.key === 'Enter') doSearch();
+	if(e.key === 'Enter') doSearch();
 })
 </script>
 </body>
